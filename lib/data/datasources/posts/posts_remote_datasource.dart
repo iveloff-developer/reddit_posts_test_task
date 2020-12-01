@@ -1,4 +1,6 @@
 import 'package:http/http.dart';
+import 'package:netsells_test/common/network/rest_endpoints.dart';
+import 'package:netsells_test/common/network/rest_headers.dart';
 import 'package:netsells_test/data/models/posts/posts_model.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
 import 'package:meta/meta.dart';
@@ -14,7 +16,12 @@ class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
 
   @override
   Future<PostsModel> getPosts(PostsTypeCredential type) {
-    // TODO: implement getPosts
-    throw UnimplementedError();
+    client.get(
+      RestEndpoints.FlutterDev.url(type),
+      headers: {
+        RestHeadersKeys.contentType: RestHeadersValues.applicationJson,
+      },
+    );
+    return null;
   }
 }
