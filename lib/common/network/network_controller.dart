@@ -11,5 +11,7 @@ class NetworkControllerImpl implements NetworkController {
   NetworkControllerImpl({@required this.dataConnectionChecker});
 
   @override
-  Future<bool> hasConnection() async {}
+  Future<bool> hasConnection() async {
+    dataConnectionChecker.hasConnection;
+  }
 }

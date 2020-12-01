@@ -17,4 +17,14 @@ void main() {
       );
     },
   );
+
+  test(
+    "should call [DataConnectionChecker.hasConnection]",
+    () async {
+      await networkController.hasConnection();
+
+      verify(mockDataConnectionChecker.hasConnection);
+      verifyNoMoreInteractions(mockDataConnectionChecker);
+    },
+  );
 }
