@@ -24,6 +24,6 @@ enum ListingModelKeys {
   data,
 }
 
-extension on ListingModelKeys {
+extension ListingModelKeysExt on ListingModelKeys {
   String get key => this.toString().split('.').last;
 }
