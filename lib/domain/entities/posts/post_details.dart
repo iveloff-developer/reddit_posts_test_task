@@ -5,11 +5,13 @@ class PostDetails extends Equatable {
   final String authorFullname;
   final String title;
   final String selftext;
+  final String url;
 
   PostDetails({
     @required this.authorFullname,
     @required this.title,
     @required this.selftext,
+    @required this.url,
   });
 
   @override
