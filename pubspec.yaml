@@ -20,6 +20,7 @@ dependencies:
   bloc: ^6.1.0
   bloc_test: ^7.1.0
   get_it: ^5.0.1
+  flutter_bloc: ^6.1.1
 
 dev_dependencies:
   flutter_test:

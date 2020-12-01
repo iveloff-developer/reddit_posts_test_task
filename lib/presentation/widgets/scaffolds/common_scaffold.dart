@@ -7,7 +7,7 @@ class CommonScaffold extends StatelessWidget {
 
   const CommonScaffold({
     Key key,
-    @required this.isLoading,
+    this.isLoading = false,
     @required this.body,
   }) : super(key: key);
 
