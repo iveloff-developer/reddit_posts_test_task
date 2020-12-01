@@ -1,7 +1,7 @@
 import 'dart:io';
 
 enum JsonFiles {
-  post,
+  post_details,
   posts,
   listing,
 }

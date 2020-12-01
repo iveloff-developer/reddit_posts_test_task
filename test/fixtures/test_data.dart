@@ -1,16 +1,17 @@
 import 'dart:convert';
 
 import 'package:netsells_test/data/models/posts/listing_model.dart';
-import 'package:netsells_test/data/models/posts/post_model.dart';
+import 'package:netsells_test/data/models/posts/post_details_model.dart';
 import 'package:netsells_test/data/models/posts/posts_model.dart';
 
 import 'json_files.dart';
 
 abstract class TestData {
-  static final postJsonMap = jsonDecode(JsonFiles.post.fixture());
+  static final postDetailsJsonMap =
+      jsonDecode(JsonFiles.post_details.fixture());
   static final postsJsonMap = jsonDecode(JsonFiles.posts.fixture());
   static final listingJsonMap = jsonDecode(JsonFiles.listing.fixture());
-  static final postModel = PostModel(
+  static final postDetailsModel = PostDetailsModel(
     authorFullname: 't2_6l4z3',
     title: 'App Feedback Thread - November 24, 2020',
     selftext:
@@ -18,8 +19,8 @@ abstract class TestData {
   );
   static final postsModel = PostsModel(
     children: [
-      postModel,
-      postModel,
+      postDetailsModel,
+      postDetailsModel,
     ],
   );
   static final listingModel = ListingModel(

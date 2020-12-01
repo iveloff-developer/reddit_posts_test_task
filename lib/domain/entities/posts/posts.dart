@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:netsells_test/domain/entities/posts/post.dart';
+import 'package:netsells_test/domain/entities/posts/post_details.dart';
 import 'package:meta/meta.dart';
 
 class Posts extends Equatable {
-  final List<Post> children;
+  final List<PostDetails> children;
 
   Posts({@required this.children});
 
