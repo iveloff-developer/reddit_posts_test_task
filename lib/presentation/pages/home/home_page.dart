@@ -20,10 +20,10 @@ class _MyHomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     credential = PostsTypeCredential.Hot;
-    _getPosts(credential);
+    _getPosts();
   }
 
-  void _getPosts(PostsTypeCredential credential) {
+  void _getPosts() {
     cubit<PostsCubit>(context).getPosts(credential);
   }
 
@@ -35,17 +35,22 @@ class _MyHomePageState extends State<HomePage> {
           setState(() {
             credential = PostsTypeCredential.values[value];
           });
-          _getPosts(credential);
+          _getPosts();
         },
       ),
     );
   }
 
   Widget _buildBody(PostsState state) {
-    return ListView(
-      children: (state is PostsLoadedState)
-          ? state.posts.children.map((post) => PostItem(post: post)).toList()
-          : [],
+    return RefreshIndicator(
+      onRefresh: () async {
+        _getPosts();
+      },
+      child: ListView(
+        children: (state is PostsLoadedState)
+            ? state.posts.children.map((post) => PostItem(post: post)).toList()
+            : [],
+      ),
     );
   }
 
