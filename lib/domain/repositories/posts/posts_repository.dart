@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
@@ -20,7 +21,11 @@ class PostsRepositoryImpl implements PostsRepository {
   @override
   Future<Posts> getPosts(PostsTypeCredential type) async {
     if (await networkController.hasConnection()) {
-      return await rds.getPosts(PostsTypeCredential.Hot);
+      try {
+        return await rds.getPosts(PostsTypeCredential.Hot);
+      } on ServerException {
+        rethrow;
+      }
     }
     return null;
   }

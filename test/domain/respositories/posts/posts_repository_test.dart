@@ -1,8 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
 import 'package:netsells_test/data/models/posts/post_model.dart';
@@ -10,8 +8,6 @@ import 'package:netsells_test/data/models/posts/posts_model.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
 import 'package:netsells_test/domain/entities/posts/posts.dart';
 import 'package:netsells_test/domain/repositories/posts/posts_repository.dart';
-
-import '../../../fixtures/json_files.dart';
 
 class MockNetworkController extends Mock implements NetworkController {}
 
@@ -46,6 +42,10 @@ void main() {
     },
   );
 
+  void getPostsFromRDS() {
+    mockRDS.getPosts(PostsTypeCredential.Hot);
+  }
+
   void whenHasConnection(bool hasConnection) {
     when(mockNetworkController.hasConnection()).thenAnswer(
       (_) async => hasConnection,
@@ -74,13 +74,23 @@ void main() {
       test(
         'should return [Posts] when the call to RDS is successful',
         () async {
-          when(mockRDS.getPosts(PostsTypeCredential.Hot)).thenAnswer(
-            (_) async => postsModel,
-          );
+          when(getPostsFromRDS()).thenAnswer((_) async => postsModel);
           final result = await repository.getPosts(PostsTypeCredential.Hot);
 
-          verify(mockRDS.getPosts(PostsTypeCredential.Hot));
+          verify(getPostsFromRDS());
           expect(result, posts);
+        },
+      );
+
+      test(
+        'should rethrow [ServerException] when the call to RDS is unsuccessful',
+        () async {
+          when(getPostsFromRDS()).thenThrow(ServerException());
+
+          expect(
+            repository.getPosts(PostsTypeCredential.Hot),
+            throwsA(isInstanceOf<ServerException>()),
+          );
         },
       );
     },
