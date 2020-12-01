@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
+import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
 import 'package:netsells_test/domain/repositories/posts/posts_repository.dart';
 
 class MockNetworkController extends Mock implements NetworkController {}
@@ -24,17 +26,35 @@ void main() {
     },
   );
 
+  void whenHasConnection(bool hasConnection) {
+    when(mockNetworkController.hasConnection()).thenAnswer(
+      (_) async => hasConnection,
+    );
+  }
+
+  test(
+    'should check if the device is online',
+    () async {
+      whenHasConnection(true);
+
+      await repository.getPosts(PostsTypeCredential.Hot);
+
+      verify(mockNetworkController.hasConnection());
+    },
+  );
   group(
-    "getHotPosts",
+    "device is online",
     () {
-      test('should check if the device is online', () async {
-        when(mockNetworkController.hasConnection())
-            .thenAnswer((_) async => true);
+      setUp(
+        () {
+          whenHasConnection(true);
+        },
+      );
 
-        await repository.getHotPosts();
-
-        verify(mockNetworkController.hasConnection());
-      });
+      test(
+        'should return [Posts] when the call to RDS is successful',
+        () async {},
+      );
     },
   );
 }

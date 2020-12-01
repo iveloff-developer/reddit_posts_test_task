@@ -1,10 +1,11 @@
 import 'package:meta/meta.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
+import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
 import 'package:netsells_test/domain/entities/posts/posts.dart';
 
 abstract class PostsRepository {
-  Future<Posts> getHotPosts();
+  Future<Posts> getPosts(PostsTypeCredential type);
 }
 
 class PostsRepositoryImpl implements PostsRepository {
@@ -17,7 +18,7 @@ class PostsRepositoryImpl implements PostsRepository {
   });
 
   @override
-  Future<Posts> getHotPosts() async {
+  Future<Posts> getPosts(PostsTypeCredential type) async {
     networkController.hasConnection();
     return null;
   }
