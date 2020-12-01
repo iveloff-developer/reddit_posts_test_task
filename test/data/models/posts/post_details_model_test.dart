@@ -5,13 +5,13 @@ import 'package:netsells_test/domain/entities/posts/post_details.dart';
 import '../../../fixtures/test_data.dart';
 
 void main() {
-  final postJsonMap = TestData.postDetailsJsonMap;
-  final postModel = TestData.postDetailsModel;
+  final postDetailsJsonMap = TestData.postDetailsJsonMap;
+  final postDetailsModel = TestData.postDetailsModel;
 
   test(
     "should be a subclass of [PostDetails]",
     () {
-      expect(postModel, isA<PostDetails>());
+      expect(postDetailsModel, isA<PostDetails>());
     },
   );
 
@@ -21,9 +21,9 @@ void main() {
       test(
         "should return a valid [PostDetailsModel] from JSON",
         () {
-          final result = PostDetailsModel.fromJson(postJsonMap);
+          final result = PostDetailsModel.fromJson(postDetailsJsonMap);
 
-          expect(result, postModel);
+          expect(result, postDetailsModel);
         },
       );
     },
