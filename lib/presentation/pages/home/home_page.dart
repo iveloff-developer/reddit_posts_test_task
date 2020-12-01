@@ -28,7 +28,9 @@ class _MyHomePageState extends State<HomePage> {
           isLoading: state is PostsLoadingState,
           body: ListView(
             children: (state is PostsLoadedState)
-                ? state.posts.children.map((post) => Text(post.title)).toList()
+                ? state.posts.children
+                    .map((post) => Text(post.data.title))
+                    .toList()
                 : [],
           ),
         );
