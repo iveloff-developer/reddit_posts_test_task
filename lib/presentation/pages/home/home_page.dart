@@ -82,7 +82,9 @@ class _MyHomePageState extends State<HomePage> {
       onRefresh: () async {
         _getPosts();
       },
-      child: ListView(children: children),
+      child: ListView(
+        children: children,
+      ),
     );
   }
 
