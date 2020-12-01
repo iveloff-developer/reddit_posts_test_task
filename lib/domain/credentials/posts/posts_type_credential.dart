@@ -5,5 +5,5 @@ enum PostsTypeCredential {
 }
 
 extension PostsTypeCredentialExt on PostsTypeCredential {
-  String get type => this.toString().split('.').last.toLowerCase();
+  String get value => this.toString().split('.').last.toLowerCase();
 }

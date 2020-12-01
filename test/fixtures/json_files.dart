@@ -3,6 +3,7 @@ import 'dart:io';
 enum JsonFiles {
   post,
   posts,
+  listing,
 }
 
 extension JsonFiledExt on JsonFiles {
