@@ -1,12 +1,12 @@
-import 'package:netsells_test/data/models/posts/post_model.dart';
+import 'package:netsells_test/data/models/posts/posts_model.dart';
 
 abstract class PostsRemoteDatasource {
-  Future<List<PostModel>> getHotPosts();
+  Future<PostsModel> getHotPosts();
 }
 
 class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
   @override
-  Future<List<PostModel>> getHotPosts() {
+  Future<PostsModel> getHotPosts() {
     // TODO: implement getPosts
     throw UnimplementedError();
   }
