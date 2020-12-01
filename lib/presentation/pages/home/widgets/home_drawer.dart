@@ -32,10 +32,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
       widthFactor: 0.4,
       child: Drawer(
         child: ListView(
-          children: [
-            _buildHomeDrawerButton(RestEndpoints.FlutterDev),
-            _buildHomeDrawerButton(RestEndpoints.Apple),
-          ],
+          children: RestEndpoints.values
+              .map((endpoint) => _buildHomeDrawerButton(endpoint))
+              .toList(),
         ),
       ),
     );

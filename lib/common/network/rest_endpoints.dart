@@ -3,6 +3,7 @@ import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dar
 enum RestEndpoints {
   FlutterDev,
   Apple,
+  Google,
 }
 
 extension RestEndpointsExt on RestEndpoints {
