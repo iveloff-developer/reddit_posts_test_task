@@ -57,15 +57,32 @@ class _MyHomePageState extends State<HomePage> {
   }
 
   Widget _buildBody(PostsState state) {
+    List<Widget> children;
+
+    if (state is PostsLoadedState) {
+      children = state.posts.children
+          .map(
+            (post) => PostItem(post: post),
+          )
+          .toList();
+    } else if (state is PostsErrorState) {
+      children = [
+        const SizedBox(height: 50),
+        Text(
+          '${state.message}\n'
+          'Pull to refresh',
+          textAlign: TextAlign.center,
+        ),
+      ];
+    } else {
+      children = [];
+    }
+
     return RefreshIndicator(
       onRefresh: () async {
         _getPosts();
       },
-      child: ListView(
-        children: (state is PostsLoadedState)
-            ? state.posts.children.map((post) => PostItem(post: post)).toList()
-            : [],
-      ),
+      child: ListView(children: children),
     );
   }
 
