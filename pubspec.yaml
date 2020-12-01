@@ -19,6 +19,7 @@ dependencies:
   http: ^0.12.2
   bloc: ^6.1.0
   bloc_test: ^7.1.0
+  get_it: ^5.0.1
 
 dev_dependencies:
   flutter_test:
