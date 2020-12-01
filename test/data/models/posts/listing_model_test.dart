@@ -19,7 +19,7 @@ void main() {
     "fromJson",
     () {
       test(
-        "should return a valid [PostsModel] from JSON",
+        "should return a valid [ListingModel] from JSON",
         () {
           final result = ListingModel.fromJson(listingJsonMap);
 

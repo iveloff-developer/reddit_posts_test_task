@@ -1,21 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:netsells_test/domain/entities/posts/post_details.dart';
 import 'package:meta/meta.dart';
 
 class Post extends Equatable {
-  final String authorFullname;
-  final String title;
-  final String selftext;
+  final PostDetails data;
 
-  Post({
-    @required this.authorFullname,
-    @required this.title,
-    @required this.selftext,
-  });
+  Post({@required this.data});
 
   @override
-  List<Object> get props => [
-        authorFullname,
-        title,
-        selftext,
-      ];
+  List<Object> get props => [data];
 }

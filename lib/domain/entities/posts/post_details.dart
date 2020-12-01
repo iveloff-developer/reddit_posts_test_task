@@ -1,0 +1,21 @@
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+
+class PostDetails extends Equatable {
+  final String authorFullname;
+  final String title;
+  final String selftext;
+
+  PostDetails({
+    @required this.authorFullname,
+    @required this.title,
+    @required this.selftext,
+  });
+
+  @override
+  List<Object> get props => [
+        authorFullname,
+        title,
+        selftext,
+      ];
+}
