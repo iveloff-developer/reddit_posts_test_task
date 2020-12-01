@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:netsells_test/common/exceptions/no_internet_exception.dart';
 import 'package:netsells_test/common/exceptions/server_exception.dart';
+import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
 import 'package:netsells_test/domain/entities/posts/posts.dart';
 import 'package:netsells_test/domain/repositories/posts/posts_repository.dart';
@@ -14,10 +15,13 @@ class PostsCubit extends Cubit<PostsState> {
 
   PostsCubit({@required this.repository}) : super(PostsInitialState());
 
-  Future<void> getPosts(PostsSortCredential credential) async {
+  Future<void> getPosts(
+    RestEndpoints endpoint,
+    PostsSortCredential credential,
+  ) async {
     emit(PostsLoadingState());
     try {
-      final posts = await repository.getPosts(credential);
+      final posts = await repository.getPosts(endpoint, credential);
       emit(PostsLoadedState(posts: posts));
     } on ServerException catch (e) {
       emit(PostsErrorState(message: e.message));

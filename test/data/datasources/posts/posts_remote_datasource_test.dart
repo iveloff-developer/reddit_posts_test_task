@@ -38,7 +38,7 @@ void main() {
       test(
         'should preform a GET request on a URL with posts type being the endpoint and with application/json header',
         () {
-          rds.getPosts(PostsSortCredential.Hot);
+          rds.getPosts(RestEndpoints.FlutterDev, PostsSortCredential.Hot);
 
           verify(
             mockClient.get(
@@ -54,7 +54,8 @@ void main() {
       test(
         'should return [Posts]',
         () async {
-          final result = await rds.getPosts(PostsSortCredential.Hot);
+          final result = await rds.getPosts(
+              RestEndpoints.FlutterDev, PostsSortCredential.Hot);
 
           expect(result, equals(postsModel));
         },
@@ -76,7 +77,7 @@ void main() {
         'should throw [ServerException] when the response code is 404 or other',
         () async {
           expect(
-            rds.getPosts(PostsSortCredential.Hot),
+            rds.getPosts(RestEndpoints.FlutterDev, PostsSortCredential.Hot),
             throwsA(isInstanceOf<ServerException>()),
           );
         },

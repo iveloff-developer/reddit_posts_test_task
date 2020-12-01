@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netsells_test/app.dart';
 import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
 import 'package:netsells_test/presentation/cubits/cubit_helper.dart';
@@ -28,7 +27,7 @@ class _MyHomePageState extends State<HomePage> {
   }
 
   void _getPosts() {
-    cubit<PostsCubit>(context).getPosts(credential);
+    cubit<PostsCubit>(context).getPosts(endpoint, credential);
   }
 
   AppBar _buildAppBar() {

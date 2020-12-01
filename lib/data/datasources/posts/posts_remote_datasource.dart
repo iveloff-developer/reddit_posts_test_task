@@ -10,7 +10,10 @@ import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dar
 import 'package:meta/meta.dart';
 
 abstract class PostsRemoteDatasource {
-  Future<PostsModel> getPosts(PostsSortCredential credential);
+  Future<PostsModel> getPosts(
+    RestEndpoints endpoint,
+    PostsSortCredential credential,
+  );
 }
 
 class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
@@ -19,9 +22,12 @@ class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
   PostsRemoteDatasourceImpl({@required this.client});
 
   @override
-  Future<PostsModel> getPosts(PostsSortCredential credential) async {
+  Future<PostsModel> getPosts(
+    RestEndpoints endpoint,
+    PostsSortCredential credential,
+  ) async {
     final response = await client.get(
-      RestEndpoints.FlutterDev.url(credential),
+      endpoint.url(credential),
       headers: {
         RestHeadersKeys.contentType: RestHeadersValues.applicationJson,
       },
