@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
 class Post extends Equatable {
   final String authorFullname;
   final String selftext;
 
   Post({
-    this.authorFullname,
-    this.selftext,
+    @required this.authorFullname,
+    @required this.selftext,
   });
 
   @override
