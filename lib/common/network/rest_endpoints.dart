@@ -4,6 +4,19 @@ enum RestEndpoints {
   FlutterDev,
   Apple,
   Google,
+  TeslaMotors,
+  Facebook,
+  Netflix,
+  Boxing,
+  Wow,
+  Music,
+  Tinder,
+  StarWars,
+  Sports,
+  Movies,
+  HarryPotter,
+  Steam,
+  Australia,
 }
 
 extension RestEndpointsExt on RestEndpoints {
