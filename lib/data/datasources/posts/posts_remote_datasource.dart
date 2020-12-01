@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/common/network/rest_headers.dart';
 import 'package:netsells_test/data/models/posts/listing_model.dart';
@@ -25,8 +26,12 @@ class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
         RestHeadersKeys.contentType: RestHeadersValues.applicationJson,
       },
     );
-    final listingJsonMap = jsonDecode(response.body);
 
-    return PostsModel.fromJson(listingJsonMap[ListingModelKeys.data.key]);
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final listingJsonMap = jsonDecode(response.body);
+      return PostsModel.fromJson(listingJsonMap[ListingModelKeys.data.key]);
+    } else {
+      throw ServerException();
+    }
   }
 }

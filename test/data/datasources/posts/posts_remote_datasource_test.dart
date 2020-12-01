@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
+import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/common/network/rest_headers.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
@@ -47,7 +48,7 @@ void main() {
   );
 
   test(
-    'should return [Posts] when the response code is 200 (success)',
+    'should return [Posts] when the response code is 200 (success)or other',
     () async {
       when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
         (_) async => Response(JsonFiles.listing.fixture(), 200),
@@ -56,6 +57,20 @@ void main() {
       final result = await rds.getPosts(PostsTypeCredential.Hot);
 
       expect(result, equals(postsModel));
+    },
+  );
+
+  test(
+    'should throw [ServerException] when the response code is 404 or other',
+    () async {
+      when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
+        (_) async => Response('Something went wrong', 404),
+      );
+
+      expect(
+        rds.getPosts(PostsTypeCredential.Hot),
+        throwsA(isInstanceOf<ServerException>()),
+      );
     },
   );
 }
