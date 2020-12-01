@@ -10,7 +10,7 @@ import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dar
 import 'package:meta/meta.dart';
 
 abstract class PostsRemoteDatasource {
-  Future<PostsModel> getPosts(PostsTypeCredential type);
+  Future<PostsModel> getPosts(PostsTypeCredential credential);
 }
 
 class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
@@ -19,9 +19,9 @@ class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
   PostsRemoteDatasourceImpl({@required this.client});
 
   @override
-  Future<PostsModel> getPosts(PostsTypeCredential type) async {
+  Future<PostsModel> getPosts(PostsTypeCredential credential) async {
     final response = await client.get(
-      RestEndpoints.FlutterDev.url(type),
+      RestEndpoints.FlutterDev.url(credential),
       headers: {
         RestHeadersKeys.contentType: RestHeadersValues.applicationJson,
       },

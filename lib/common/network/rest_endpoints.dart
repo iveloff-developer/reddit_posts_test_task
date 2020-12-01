@@ -8,7 +8,7 @@ extension RestEndpointsExt on RestEndpoints {
   static const String _baseUrl = 'https://www.reddit.com/r';
 
   String get _endpoint => this.toString().split('.').last;
-  String url(PostsTypeCredential type) {
-    return '$_baseUrl/$_endpoint/${type.value}.json';
+  String url(PostsTypeCredential credential) {
+    return '$_baseUrl/$_endpoint/${credential.value}.json';
   }
 }

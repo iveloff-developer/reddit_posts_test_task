@@ -7,7 +7,7 @@ import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dar
 import 'package:netsells_test/domain/entities/posts/posts.dart';
 
 abstract class PostsRepository {
-  Future<Posts> getPosts(PostsTypeCredential type);
+  Future<Posts> getPosts(PostsTypeCredential credential);
 }
 
 class PostsRepositoryImpl implements PostsRepository {
@@ -20,7 +20,7 @@ class PostsRepositoryImpl implements PostsRepository {
   });
 
   @override
-  Future<Posts> getPosts(PostsTypeCredential type) async {
+  Future<Posts> getPosts(PostsTypeCredential credential) async {
     if (await networkController.hasConnection()) {
       try {
         return await rds.getPosts(PostsTypeCredential.Hot);
