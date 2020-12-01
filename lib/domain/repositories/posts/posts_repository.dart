@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:netsells_test/common/exceptions/no_internet_exception.dart';
 import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
@@ -27,6 +28,6 @@ class PostsRepositoryImpl implements PostsRepository {
         rethrow;
       }
     }
-    return null;
+    throw NoInternetException();
   }
 }

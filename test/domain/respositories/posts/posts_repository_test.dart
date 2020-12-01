@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:netsells_test/common/exceptions/no_internet_exception.dart';
 import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
@@ -90,6 +91,26 @@ void main() {
           expect(
             repository.getPosts(PostsTypeCredential.Hot),
             throwsA(isInstanceOf<ServerException>()),
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    "device is offline",
+    () {
+      setUp(
+        () {
+          whenHasConnection(false);
+        },
+      );
+      test(
+        'should throw [NoInternetException]',
+        () async {
+          expect(
+            repository.getPosts(PostsTypeCredential.Hot),
+            throwsA(isInstanceOf<NoInternetException>()),
           );
         },
       );
