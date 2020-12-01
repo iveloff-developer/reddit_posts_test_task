@@ -19,7 +19,9 @@ class PostsRepositoryImpl implements PostsRepository {
 
   @override
   Future<Posts> getPosts(PostsTypeCredential type) async {
-    networkController.hasConnection();
+    if (await networkController.hasConnection()) {
+      return await rds.getPosts(PostsTypeCredential.Hot);
+    }
     return null;
   }
 }
