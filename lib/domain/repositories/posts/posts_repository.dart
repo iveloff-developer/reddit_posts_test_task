@@ -4,7 +4,7 @@ import 'package:netsells_test/domain/entities/posts/post.dart';
 import 'package:meta/meta.dart';
 
 abstract class PostsRepository {
-  Future<List<Post>> getPosts();
+  Future<List<Post>> getHotPosts();
 }
 
 class PostsRepositoryImpl implements PostsRepository {
@@ -17,8 +17,8 @@ class PostsRepositoryImpl implements PostsRepository {
   });
 
   @override
-  Future<List<Post>> getPosts() async {
-    // TODO: implement getPosts
-    throw UnimplementedError();
+  Future<List<Post>> getHotPosts() async {
+    networkController.hasConnection();
+    return null;
   }
 }

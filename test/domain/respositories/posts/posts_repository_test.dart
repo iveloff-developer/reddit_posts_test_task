@@ -23,4 +23,18 @@ void main() {
       );
     },
   );
+
+  group(
+    "getHotPosts",
+    () {
+      test('should check if the device is online', () async {
+        when(mockNetworkController.hasConnection())
+            .thenAnswer((_) async => true);
+
+        await repository.getHotPosts();
+
+        verify(mockNetworkController.hasConnection());
+      });
+    },
+  );
 }
