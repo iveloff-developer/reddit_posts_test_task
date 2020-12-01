@@ -10,4 +10,20 @@ class ListingModel extends Listing {
           kind: kind,
           data: data,
         );
+
+  factory ListingModel.fromJson(Map<String, dynamic> json) {
+    return ListingModel(
+      kind: json[ListingModelKeys.kind.key],
+      data: PostsModel.fromJson(json[ListingModelKeys.data.key]),
+    );
+  }
+}
+
+enum ListingModelKeys {
+  kind,
+  data,
+}
+
+extension on ListingModelKeys {
+  String get key => this.toString().split('.').last;
 }
