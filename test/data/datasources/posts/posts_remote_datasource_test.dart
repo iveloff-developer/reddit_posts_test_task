@@ -25,7 +25,7 @@ void main() {
     'should preform a GET request on a URL with posts type being the endpoint and with application/json header',
     () {
       when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-        (_) async => Response(JsonFiles.posts.fixture(), 200),
+        (_) async => Response(JsonFiles.listing.fixture(), 200),
       );
 
       rds.getPosts(PostsTypeCredential.Hot);
