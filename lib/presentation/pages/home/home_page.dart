@@ -32,7 +32,7 @@ class _MyHomePageState extends State<HomePage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text('Posts'),
+      title: Text(endpoint.endpoint),
       bottom: CommonTabBar(
         onTabTap: (value) {
           setState(() {
@@ -50,6 +50,7 @@ class _MyHomePageState extends State<HomePage> {
         setState(() {
           endpoint = newEndpoint;
         });
+        _getPosts();
         Navigator.pop(context);
       },
     );
