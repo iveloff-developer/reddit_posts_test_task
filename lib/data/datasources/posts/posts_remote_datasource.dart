@@ -6,11 +6,11 @@ import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/common/network/rest_headers.dart';
 import 'package:netsells_test/data/models/posts/listing_model.dart';
 import 'package:netsells_test/data/models/posts/posts_model.dart';
-import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
+import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
 import 'package:meta/meta.dart';
 
 abstract class PostsRemoteDatasource {
-  Future<PostsModel> getPosts(PostsTypeCredential credential);
+  Future<PostsModel> getPosts(PostsSortCredential credential);
 }
 
 class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
@@ -19,7 +19,7 @@ class PostsRemoteDatasourceImpl implements PostsRemoteDatasource {
   PostsRemoteDatasourceImpl({@required this.client});
 
   @override
-  Future<PostsModel> getPosts(PostsTypeCredential credential) async {
+  Future<PostsModel> getPosts(PostsSortCredential credential) async {
     final response = await client.get(
       RestEndpoints.FlutterDev.url(credential),
       headers: {

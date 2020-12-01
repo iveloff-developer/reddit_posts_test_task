@@ -4,12 +4,14 @@ import 'package:netsells_test/presentation/widgets/loading_indicator/common_circ
 class CommonScaffold extends StatelessWidget {
   final bool isLoading;
   final AppBar appBar;
+  final Widget drawer;
   final Widget body;
 
   const CommonScaffold({
     Key key,
     this.isLoading = false,
     this.appBar,
+    this.drawer,
     @required this.body,
   }) : super(key: key);
 
@@ -19,6 +21,7 @@ class CommonScaffold extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: appBar,
+        drawer: drawer,
         body: Stack(
           children: [
             if (isLoading) CommonCircularLoadingIndicator(),

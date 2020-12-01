@@ -4,7 +4,7 @@ import 'package:netsells_test/common/exceptions/no_internet_exception.dart';
 import 'package:netsells_test/common/exceptions/server_exception.dart';
 import 'package:netsells_test/common/network/network_controller.dart';
 import 'package:netsells_test/data/datasources/posts/posts_remote_datasource.dart';
-import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
+import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
 import 'package:netsells_test/domain/entities/posts/posts.dart';
 import 'package:netsells_test/domain/repositories/posts/posts_repository.dart';
 
@@ -34,7 +34,7 @@ void main() {
   final Posts posts = postsModel;
 
   void getPostsFromRDS() {
-    mockRDS.getPosts(PostsTypeCredential.Hot);
+    mockRDS.getPosts(PostsSortCredential.Hot);
   }
 
   void whenHasConnection(bool hasConnection) {
@@ -48,7 +48,7 @@ void main() {
     () async {
       whenHasConnection(true);
 
-      await repository.getPosts(PostsTypeCredential.Hot);
+      await repository.getPosts(PostsSortCredential.Hot);
 
       verify(mockNetworkController.hasConnection());
     },
@@ -66,7 +66,7 @@ void main() {
         'should return [Posts] when the call to RDS is successful',
         () async {
           when(getPostsFromRDS()).thenAnswer((_) async => postsModel);
-          final result = await repository.getPosts(PostsTypeCredential.Hot);
+          final result = await repository.getPosts(PostsSortCredential.Hot);
 
           verify(getPostsFromRDS());
           expect(result, posts);
@@ -79,7 +79,7 @@ void main() {
           when(getPostsFromRDS()).thenThrow(ServerException());
 
           expect(
-            repository.getPosts(PostsTypeCredential.Hot),
+            repository.getPosts(PostsSortCredential.Hot),
             throwsA(isInstanceOf<ServerException>()),
           );
         },
@@ -99,7 +99,7 @@ void main() {
         'should throw [NoInternetException]',
         () async {
           expect(
-            repository.getPosts(PostsTypeCredential.Hot),
+            repository.getPosts(PostsSortCredential.Hot),
             throwsA(isInstanceOf<NoInternetException>()),
           );
         },

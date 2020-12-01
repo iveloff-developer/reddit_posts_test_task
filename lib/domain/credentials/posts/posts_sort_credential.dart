@@ -1,9 +1,9 @@
-enum PostsTypeCredential {
+enum PostsSortCredential {
   Hot,
   New,
   Top,
 }
 
-extension PostsTypeCredentialExt on PostsTypeCredential {
+extension PostsSortCredentialExt on PostsSortCredential {
   String get value => this.toString().split('.').last.toLowerCase();
 }

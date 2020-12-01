@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netsells_test/domain/credentials/posts/posts_type_credential.dart';
+import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
 
 typedef VoidTabBarCallback = void Function(int);
 
@@ -20,15 +20,15 @@ class CommonTabBar extends StatelessWidget implements PreferredSizeWidget {
       onTap: onTabTap,
       tabs: [
         Tab(
-          text: PostsTypeCredential.Hot.value,
+          text: PostsSortCredential.Hot.value,
           icon: Icon(Icons.local_fire_department),
         ),
         Tab(
-          text: PostsTypeCredential.New.value,
+          text: PostsSortCredential.New.value,
           icon: Icon(Icons.fiber_new),
         ),
         Tab(
-          text: PostsTypeCredential.Top.value,
+          text: PostsSortCredential.Top.value,
           icon: Icon(Icons.star_rate),
         ),
       ],
