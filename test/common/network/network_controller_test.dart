@@ -18,6 +18,12 @@ void main() {
     },
   );
 
+  void _whenHasConnection(bool value) {
+    when(mockDataConnectionChecker.hasConnection).thenAnswer(
+      (_) async => value,
+    );
+  }
+
   test(
     "should call [DataConnectionChecker.hasConnection]",
     () async {
@@ -25,6 +31,28 @@ void main() {
 
       verify(mockDataConnectionChecker.hasConnection);
       verifyNoMoreInteractions(mockDataConnectionChecker);
+    },
+  );
+
+  test(
+    "should return [true] when device connected to network",
+    () async {
+      _whenHasConnection(true);
+
+      final result = await networkController.hasConnection();
+
+      expect(result, true);
+    },
+  );
+
+  test(
+    "should return [false] when device didn't connected to network",
+    () async {
+      _whenHasConnection(false);
+
+      final result = await networkController.hasConnection();
+
+      expect(result, false);
     },
   );
 }
