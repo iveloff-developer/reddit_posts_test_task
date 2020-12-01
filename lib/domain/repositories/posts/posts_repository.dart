@@ -23,7 +23,7 @@ class PostsRepositoryImpl implements PostsRepository {
   Future<Posts> getPosts(PostsTypeCredential credential) async {
     if (await networkController.hasConnection()) {
       try {
-        return await rds.getPosts(PostsTypeCredential.Hot);
+        return await rds.getPosts(credential);
       } on ServerException {
         rethrow;
       }
