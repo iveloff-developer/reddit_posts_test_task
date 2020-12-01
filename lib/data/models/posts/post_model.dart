@@ -4,9 +4,11 @@ import 'package:meta/meta.dart';
 class PostModel extends Post {
   PostModel({
     @required String authorFullname,
+    @required String title,
     @required String selftext,
   }) : super(
           authorFullname: authorFullname,
+          title: title,
           selftext: selftext,
         );
 }

@@ -3,13 +3,19 @@ import 'package:meta/meta.dart';
 
 class Post extends Equatable {
   final String authorFullname;
+  final String title;
   final String selftext;
 
   Post({
     @required this.authorFullname,
+    @required this.title,
     @required this.selftext,
   });
 
   @override
-  List<Object> get props => [authorFullname, selftext];
+  List<Object> get props => [
+        authorFullname,
+        title,
+        selftext,
+      ];
 }
