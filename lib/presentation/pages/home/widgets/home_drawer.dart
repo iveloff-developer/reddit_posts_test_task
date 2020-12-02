@@ -5,11 +5,11 @@ import 'package:netsells_test/presentation/pages/home/widgets/home_drawer_button
 typedef DrawerCallback = void Function(RestEndpoints endpoint);
 
 class HomeDrawer extends StatefulWidget {
-  final DrawerCallback callback;
+  final DrawerCallback onItemPressed;
 
   const HomeDrawer({
     Key key,
-    @required this.callback,
+    @required this.onItemPressed,
   }) : super(key: key);
 
   @override
@@ -17,24 +17,22 @@ class HomeDrawer extends StatefulWidget {
 }
 
 class _HomeDrawerState extends State<HomeDrawer> {
-  Widget _buildHomeDrawerButton(RestEndpoints endpoint) {
-    return HomeDrawerButton(
-      title: endpoint.endpoint,
-      onPressed: () {
-        widget.callback(endpoint);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       widthFactor: 0.4,
       child: Drawer(
         child: ListView(
-          children: RestEndpoints.values
-              .map((endpoint) => _buildHomeDrawerButton(endpoint))
-              .toList(),
+          children: RestEndpoints.values.map(
+            (endpoint) {
+              return HomeDrawerButton(
+                title: endpoint.value,
+                onPressed: () {
+                  widget.onItemPressed(endpoint);
+                },
+              );
+            },
+          ).toList(),
         ),
       ),
     );

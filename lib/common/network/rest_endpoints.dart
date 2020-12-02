@@ -22,8 +22,8 @@ enum RestEndpoints {
 extension RestEndpointsExt on RestEndpoints {
   static const String _baseUrl = 'https://www.reddit.com/r';
 
-  String get endpoint => this.toString().split('.').last;
+  String get value => this.toString().split('.').last;
   String url(PostsSortCredential credential) {
-    return '$_baseUrl/$endpoint/${credential.value}.json';
+    return '$_baseUrl/$value/${credential.value}.json';
   }
 }
