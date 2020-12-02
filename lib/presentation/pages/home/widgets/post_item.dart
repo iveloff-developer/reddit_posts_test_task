@@ -10,6 +10,13 @@ class PostItem extends StatelessWidget {
     @required this.post,
   }) : super(key: key);
 
+  Future<void> onUrlButtonPressed() async {
+    final url = post.data.url;
+    if (await canLaunch(url)) {
+      launch(url);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,12 +25,7 @@ class PostItem extends StatelessWidget {
       child: ExpansionTile(
         leading: IconButton(
           icon: Icon(Icons.launch),
-          onPressed: () async {
-            final url = post.data.url;
-            if (await canLaunch(url)) {
-              launch(url);
-            }
-          },
+          onPressed: onUrlButtonPressed,
         ),
         title: Text(
           post.data.title,

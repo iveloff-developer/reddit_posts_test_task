@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
-import 'package:netsells_test/domain/entities/posts/post.dart';
 import 'package:netsells_test/presentation/cubits/cubit_helper.dart';
 import 'package:netsells_test/presentation/cubits/posts/posts_cubit.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/post_item.dart';
@@ -19,10 +18,6 @@ class HomeListView extends StatelessWidget {
     @required this.sortCredential,
   }) : super(key: key);
 
-  List<PostItem> _getPostItemListFromPosts(List<Post> posts) {
-    return posts.map((post) => PostItem(post: post)).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PostsCubit, PostsState>(
@@ -33,7 +28,9 @@ class HomeListView extends StatelessWidget {
           },
           children: [
             if (state is PostsLoadedState)
-              ...?_getPostItemListFromPosts(state.posts.children),
+              ...?state.posts.children
+                  .map((post) => PostItem(post: post))
+                  .toList(),
             if (state is PostsErrorState)
               PullToRefreshText(errorMessage: state.message),
           ],

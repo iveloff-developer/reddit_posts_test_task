@@ -7,9 +7,7 @@ import 'package:netsells_test/presentation/cubits/posts/posts_cubit.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/home_app_bar.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/home_drawer.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/home_list_view.dart';
-import 'package:netsells_test/presentation/pages/home/widgets/post_item.dart';
 import 'package:netsells_test/presentation/widgets/scaffolds/common_scaffold.dart';
-import 'package:netsells_test/presentation/widgets/tab_bars/common_tab_bar.dart';
 
 class HomePage extends StatefulWidget {
   @override
