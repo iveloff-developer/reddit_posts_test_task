@@ -26,7 +26,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           children: RestEndpoints.values.map(
             (endpoint) {
               return HomeDrawerButton(
-                title: endpoint.endpoint,
+                title: endpoint.value,
                 onPressed: () {
                   widget.callback(endpoint);
                 },

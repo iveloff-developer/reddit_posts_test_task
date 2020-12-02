@@ -4,6 +4,7 @@ import 'package:netsells_test/common/network/rest_endpoints.dart';
 import 'package:netsells_test/domain/credentials/posts/posts_sort_credential.dart';
 import 'package:netsells_test/presentation/cubits/cubit_helper.dart';
 import 'package:netsells_test/presentation/cubits/posts/posts_cubit.dart';
+import 'package:netsells_test/presentation/pages/home/widgets/home_app_bar.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/home_drawer.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/home_list_view.dart';
 import 'package:netsells_test/presentation/pages/home/widgets/post_item.dart';
@@ -31,32 +32,6 @@ class _MyHomePageState extends State<HomePage> {
     cubit<PostsCubit>(context).getPosts(endpoint, sortCredential);
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text(endpoint.endpoint),
-      bottom: CommonTabBar(
-        onTabTap: (value) {
-          setState(() {
-            sortCredential = PostsSortCredential.values[value];
-          });
-          _getPosts();
-        },
-      ),
-    );
-  }
-
-  Widget _buildDrawer() {
-    return HomeDrawer(
-      callback: (newEndpoint) {
-        setState(() {
-          endpoint = newEndpoint;
-        });
-        _getPosts();
-        Navigator.pop(context);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostsCubit, PostsState>(
@@ -64,8 +39,28 @@ class _MyHomePageState extends State<HomePage> {
       builder: (context, state) {
         return CommonScaffold(
           isLoading: state is PostsLoadingState,
-          appBar: _buildAppBar(),
-          drawer: _buildDrawer(),
+          appBar: HomeAppBar(
+            title: endpoint.value,
+            onTabTap: (value) {
+              setState(
+                () {
+                  sortCredential = PostsSortCredential.values[value];
+                },
+              );
+              _getPosts();
+            },
+          ),
+          drawer: HomeDrawer(
+            callback: (newEndpoint) {
+              setState(
+                () {
+                  endpoint = newEndpoint;
+                },
+              );
+              _getPosts();
+              Navigator.pop(context);
+            },
+          ),
           body: HomeListView(
             endpoint: endpoint,
             sortCredential: sortCredential,
