@@ -17,24 +17,22 @@ class HomeDrawer extends StatefulWidget {
 }
 
 class _HomeDrawerState extends State<HomeDrawer> {
-  Widget _buildHomeDrawerButton(RestEndpoints endpoint) {
-    return HomeDrawerButton(
-      title: endpoint.endpoint,
-      onPressed: () {
-        widget.callback(endpoint);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       widthFactor: 0.4,
       child: Drawer(
         child: ListView(
-          children: RestEndpoints.values
-              .map((endpoint) => _buildHomeDrawerButton(endpoint))
-              .toList(),
+          children: RestEndpoints.values.map(
+            (endpoint) {
+              return HomeDrawerButton(
+                title: endpoint.endpoint,
+                onPressed: () {
+                  widget.callback(endpoint);
+                },
+              );
+            },
+          ).toList(),
         ),
       ),
     );
