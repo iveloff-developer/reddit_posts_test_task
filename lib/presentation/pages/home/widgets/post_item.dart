@@ -7,7 +7,7 @@ class PostItem extends StatelessWidget {
 
   const PostItem({
     Key key,
-    this.post,
+    @required this.post,
   }) : super(key: key);
 
   @override
