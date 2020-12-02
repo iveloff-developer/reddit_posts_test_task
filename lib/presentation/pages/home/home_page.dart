@@ -32,35 +32,29 @@ class _MyHomePageState extends State<HomePage> {
     cubit<PostsCubit>(context).getPosts(endpoint, sortCredential);
   }
 
+  void onTabTap(int newValue) {
+    setState(() {
+      sortCredential = PostsSortCredential.values[newValue];
+    });
+    _getPosts();
+  }
+
+  void onHomeDrawerItemPressed(RestEndpoints newEndpoint) {
+    setState(() {
+      endpoint = newEndpoint;
+    });
+    _getPosts();
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PostsCubit, PostsState>(
-      listener: (context, state) {},
+    return BlocBuilder<PostsCubit, PostsState>(
       builder: (context, state) {
         return CommonScaffold(
           isLoading: state is PostsLoadingState,
-          appBar: HomeAppBar(
-            title: endpoint.value,
-            onTabTap: (value) {
-              setState(
-                () {
-                  sortCredential = PostsSortCredential.values[value];
-                },
-              );
-              _getPosts();
-            },
-          ),
-          drawer: HomeDrawer(
-            callback: (newEndpoint) {
-              setState(
-                () {
-                  endpoint = newEndpoint;
-                },
-              );
-              _getPosts();
-              Navigator.pop(context);
-            },
-          ),
+          appBar: HomeAppBar(title: endpoint.value, onTabTap: onTabTap),
+          drawer: HomeDrawer(onItemPressed: onHomeDrawerItemPressed),
           body: HomeListView(
             endpoint: endpoint,
             sortCredential: sortCredential,
